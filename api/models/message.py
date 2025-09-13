@@ -28,5 +28,10 @@ class Message:
     VALIDATION_PASSWORD_SHORT = "Password must be at least 8 characters long."
     VALIDATION_PASSWORDS_NO_MATCH = "Passwords do not match."
 
+   # --- Default Database Messages ---
+    DATABASE_CONNECTED = "Database connection is OK."
+    DATABASE_CONNECTION_FAILED = "Error: Could not connect to the database."
+    DATABASE_QUERY_FAILED = "Error: The test query failed to return the expected result."
+
 # To invoke the Message Class, use: `MSG.SUCCESS_CREATED`
 MSG = Message()

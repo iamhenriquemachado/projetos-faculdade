@@ -1,12 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
+from services.database import checkSqlServerConnection
+from fastapi.middleware.cors import CORSMiddleware
+from router import transaction
+
 
 app = FastAPI()
-
+router = APIRouter()
 API_PORT = 3000
 
-@app.get('/welcome')
-async def helloServer():
-    return {"message": f"API is running on port {API_PORT}."}
+app.include_router(transaction.router, prefix="/api", tags=["api"])
+
 
 if __name__ == "__main__":
     import uvicorn

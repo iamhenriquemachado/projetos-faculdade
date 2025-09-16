@@ -6,10 +6,6 @@ from models.message import MSG
 router = APIRouter()
 logger = logging.getLogger("uvicorn")
 
-@router.get("/transaction")
-async def transactions():
-    return True
-
-@router.get("/welcome")
-async def checkServerConnection():
-    return {f"status": True, "message": MSG.SUCCESS_DEFAULT}
+@router.post("/transaction/{account_id}")
+async def createNewTransaction():
+    return False

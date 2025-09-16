@@ -18,6 +18,9 @@ connection_string = f'DRIVER={DRIVER};SERVER={DB_SERVER};DATABASE={DB_SCHEMA};UI
 def get_connection():
     return pyodbc.connect(connection_string, timeout=5)
 
+def execute_query(query, params=None):
+    return True
+
 def checkSqlServerConnection():
     try:
         with pyodbc.connect(connection_string, timeout=5) as conn:

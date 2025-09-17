@@ -1,50 +1,57 @@
-from dotenv import load_dotenv
 import os
 import pyodbc
-from models.message import MSG
-
+from dotenv import load_dotenv
+import logging
 
 load_dotenv()
 
-DRIVER = '{ODBC Driver 17 for SQL Server}'
-DB_SERVER = os.getenv("DB_SERVER")
-DB_SCHEMA = os.getenv("DATABASE_SCHEMA")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
+try:
+    DRIVER = '{ODBC Driver 17 for SQL Server}'
+    DB_SERVER = os.environ["DB_SERVER"]
+    DB_SCHEMA = os.environ["DATABASE_SCHEMA"]
+    DB_USER = os.environ["DB_USER"]
+    DB_PASSWORD = os.environ["DB_PASSWORD"]
 
-
-connection_string = f'DRIVER={DRIVER};SERVER={DB_SERVER};DATABASE={DB_SCHEMA};UID={DB_USER};PWD={DB_PASSWORD}'
+    connection_string = f'DRIVER={DRIVER};SERVER={DB_SERVER};DATABASE={DB_SCHEMA};UID={DB_USER};PWD={DB_PASSWORD}'
+except KeyError as e:
+    logging.error(f"Erro: Variável de ambiente não encontrada - {e}")
+    raise SystemExit(f"Variável de ambiente {e} não configurada.")
 
 def get_connection():
-    return pyodbc.connect(connection_string, timeout=5)
-
-def execute_query(query, params=None):
-    return True
-
-def checkSqlServerConnection():
     try:
-        with pyodbc.connect(connection_string, timeout=5) as conn:
+        return pyodbc.connect(connection_string, timeout=5)
+    except pyodbc.Error as ex:
+        sqlstate = ex.args[0]
+        logging.error(f"Erro de conexão com o banco de dados: {sqlstate}")
+        raise
 
-            cursor = conn.cursor()
-            cursor.execute("SELECT TOP 1 1 FROM [Contas]")
-            row = cursor.fetchall()
+def fetch_one(query: str, params: tuple = None):
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, params if params else [])
+                return cursor.fetchone()
+    except pyodbc.Error as e:
+        logging.error(f"Erro ao executar fetch_one: {e}")
+        return None
 
-            if row and row[0][0] == 1:
-                print(MSG.DATABASE_CONNECTED)
-                return True
-            else:
-                print(MSG.DATABASE_QUERY_FAILED)
-                return False
-            
-    except pyodbc.Error as exception:
-        print(f"{MSG.DATABASE_CONNECTION_FAILED}")
-        print(f"Details: {exception}")
-        return False
-    except Exception as e:
-        print(f"{MSG.ERROR_DEFAULT}")
-        print(f"Details: {e}")
-        return False
+def fetch_all(query: str, params: tuple = None):
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, params if params else [])
+                return cursor.fetchall()
+    except pyodbc.Error as e:
+        logging.error(f"Erro ao executar fetch_all: {e}")
+        return []
 
-            
-
-
+def execute_commit(query: str, params: tuple = None):
+    try:
+        with get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, params if params else [])
+                conn.commit()
+                return cursor.rowcount 
+    except pyodbc.Error as e:
+        logging.error(f"Erro ao executar execute_commit: {e}")
+        return None

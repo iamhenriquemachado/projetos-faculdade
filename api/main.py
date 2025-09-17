@@ -1,5 +1,4 @@
 from fastapi import FastAPI, APIRouter
-from services.database import checkSqlServerConnection
 from fastapi.middleware.cors import CORSMiddleware
 from router import transaction
 

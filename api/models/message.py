@@ -33,5 +33,9 @@ class Message:
     DATABASE_CONNECTION_FAILED = "Error: Could not connect to the database."
     DATABASE_QUERY_FAILED = "Error: The test query failed to return the expected result."
 
+    # --- Default Transaction Messages ---
+    TRANSACTION_USER_EXISTS = "The user does not exists in the database. Please check."
+    TRANSACTION_INSUFICCIENT_BALANCE = "The user does not have enough balance in their account."
+
 # To invoke the Message Class, use: `MSG.SUCCESS_CREATED`
 MSG = Message()

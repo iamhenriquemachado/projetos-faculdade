@@ -1,0 +1,148 @@
+/* Configurações Globais e de Performance */
+:root {
+  --primary-color: #0056b3;
+  --background-color: #f4f7f6;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --income-color: #28a745;
+  --outcome-color: #dc3545;
+  --highlight-color: #ffc107;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilos do Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+/* Estilos do Resumo de Saldo */
+.balance-summary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.balance-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Estilos da Lista de Transações (Mobile-First) */
+.transaction-list h2 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-background);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease-in-out;
+}
+
+.transaction-item:hover {
+  transform: scale(1.02);
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-description {
+  font-weight: 500;
+}
+
+.transaction-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.transaction-value {
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.transaction-value.income {
+  color: var(--income-color);
+}
+
+.transaction-value.outcome {
+  color: var(--outcome-color);
+}
+
+/* Destaque para Transações de Alto Valor */
+.transaction-item.high-value {
+  border-left: 5px solid var(--highlight-color);
+  background-color: #fffbeb;
+}
+
+.alert-icon {
+  margin-left: 8px;
+  font-size: 1rem;
+  color: var(--highlight-color);
+}
+
+/* Estilos do Rodapé */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Media Query para Telas Maiores (Tablets e Desktops) */
+@media (min-width: 768px) {
+  .container {
+    padding: 40px;
+  }
+
+  .balance-value {
+    font-size: 2.5rem;
+  }
+
+  .transaction-item {
+    padding: 20px;
+  }
+
+  .transaction-value {
+    font-size: 1.2rem;
+  }
+}

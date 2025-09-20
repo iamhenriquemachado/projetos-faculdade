@@ -10,16 +10,9 @@ class Message:
     SUCCESS_DELETED = "The resource was deleted successfully."
 
     # --- Default Error Messages ---
-    ERROR_DEFAULT = "An unexpected error occurred. Please try again later."
+    ERROR_DEFAULT = "An unexpected error occurred. Please try again later. Error: "
     ERROR_NOT_FOUND = "The requested resource could not be found."
     ERROR_INVALID_ID = "The provided ID is not valid."
-
-    # --- Default Authentication Messages ---
-    AUTH_LOGIN_SUCCESS = "You have been successfully logged in."
-    AUTH_LOGIN_FAILED = "Invalid credentials."
-    AUTH_LOGOUT_SUCCESS = "You have been successfully logged out."
-    AUTH_REQUIRED = "Authentication is required to access this resource."
-    AUTH_FORBIDDEN = "You do not have permission to perform this action."
 
     # --- Default Validation Messages ---
     VALIDATION_FAILED = "Validation failed. Check the fields."
@@ -34,7 +27,7 @@ class Message:
     DATABASE_QUERY_FAILED = "Error: The test query failed to return the expected result."
 
     # --- Default Transaction Messages ---
-    TRANSACTION_USER_EXISTS = "The user does not exists in the database. Please check."
+    TRANSACTION_USER_NOT_EXISTS = "The user does not exists in the database. Please check."
     TRANSACTION_INSUFICCIENT_BALANCE = "The user does not have enough balance in their account."
 
 # To invoke the Message Class, use: `MSG.SUCCESS_CREATED`

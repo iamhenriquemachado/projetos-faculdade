@@ -27,8 +27,10 @@ class TransactionService:
             transaction_id = self.repository.insert_transaction(transaction_data, account_id)
             if transaction_id == 0:
                 return {"error": MSG.DATABASE_QUERY_FAILED, "status_code": 400}
+            
+            unique_id = transaction_data.transacao_id
 
-            return {"message": MSG.DATABASE_QUERY_FAILED, "transaction_record": transaction_id, "status_code": 201}
+            return {"message": MSG.SUCCESS_DEFAULT, "transaction_record": unique_id, "status_code": 201}
         
         except Exception as ex:
             logging.error(f"Error: {ex}")

@@ -1,4 +1,7 @@
 class Message:
+    # --- Default Success Messages ---
+    SUCCESS_DEFAULT = "Operação realizada com sucesso."
+
     # --- Default Error Messages ---
     ERROR_DEFAULT = "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde."
 
